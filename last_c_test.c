@@ -9,7 +9,6 @@ struct DespesasProjeto
     char salarioDeslocamento[10];
     char outrosGastos[10];
 };
-
 struct Projeto // Cria uma STRUCT para armazenar os dados de uma pessoa
 {
     char codigoDoProjeto[10];
@@ -20,20 +19,38 @@ struct Projeto // Cria uma STRUCT para armazenar os dados de uma pessoa
     char receitaProjeto[100];
 }; // Define o nome do novo tipo criado
 
-int getLucroTotal() {
-    return 0;
+void getLucroTotal(Projeto projetoArray[]) {
+    
+}
+void getProjetosAtrasados(Projeto projetoArray[]) {
+    
+}
+void getProjetoComMaisHorasExtras(Projeto projetoArray[]) {
+    
+}
+void getProjetoComMaiorGasto(Projeto projetoArray[]) {
+    
+}
+void getAllProjectsInfo(Projeto projetoArray[]) {
+    
+}
+void getProjectInfoByGerente(Projeto projetoArray[]) {
+    
+}
+void getProjectInfoByCliente(Projeto projetoArray[]) {
+    
 }
 
 int getUserOption() {
     unsigned int option;
     
-    printf("Digite uma opção abaixo");
+    printf("Digite uma das opções acima: ");
     scanf("%d", &option);
 
     return option;
 }
 void showAvaiableOptions() {
-    printf("1 - Lucro Total dos projetos em andamento \n");
+    printf("\n1 - Lucro Total dos projetos em andamento \n");
     printf("2 - Quantos projetos estão atrasados \n");
     printf("3 - Projeto com maior gasto com horas extras \n");
     printf("4 - Projeto com maior gasto total \n");
@@ -42,7 +59,7 @@ void showAvaiableOptions() {
     printf("0 - Sair \n");
 }
 int main() {
-    int option = 0;
+    int option = 1;
     while (option == 1)
     {
         showAvaiableOptions();
@@ -68,11 +85,10 @@ int main() {
             printf("CASO SEIS");
             break;
         default:
+            option = 0;
             break;
         }
     }
     
-    
-
     return 0;
 }
