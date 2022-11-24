@@ -31,10 +31,7 @@ void getProjetoComMaisHorasExtras(Projeto projetoArray[]) {
 void getProjetoComMaiorGasto(Projeto projetoArray[]) {
     
 }
-void getAllProjectsInfo(Projeto projetoArray[]) {
-    
-}
-void getProjectInfoByGerente(Projeto projetoArray[]) {
+void getProjectsInfoByGerente(Projeto projetoArray[]) {
     
 }
 void getProjectInfoByCliente(Projeto projetoArray[]) {
@@ -67,21 +64,27 @@ int main() {
         switch (userOption)
         {
         case 1:
+            getLucroTotal()
             printf("CASO UM");
             break;
         case 2:
+            getProjetosAtrasados()
             printf("CASO DOIS");
             break;
         case 3:
+            getProjetoComMaisHorasExtras()
             printf("CASO TRÊS");
             break;
         case 4:
+            getProjetoComMaiorGasto()
             printf("CASO QUATRO");
             break;
         case 5:
+            getProjectsInfoByGerente()
             printf("CASO CINCO");
             break;
         case 6:
+            getProjectInfoByCliente()
             printf("CASO SEIS");
             break;
         default:
