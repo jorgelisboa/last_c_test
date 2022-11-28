@@ -20,11 +20,11 @@ typedef struct  // Cria uma STRUCT para armazenar os dados de uma pessoa
 }Projeto; // Define o nome do novo tipo criado
 
 void getLucroTotal(Projeto** listaDeProjetos, unsigned int avaiableProjects) {
-    printf("getLucroTotal\n");
+    printf("\nAVAIABLE PROJECTS: %d", avaiableProjects);
     for (unsigned int i = 0; i < avaiableProjects; i++)
     {
         printf("\n%d", i);
-        printf("%s", listaDeProjetos[i]->cliente);
+        printf("\n%s", listaDeProjetos[i]->cliente);
     }
 }
 void getProjetosAtrasados() {
@@ -87,7 +87,32 @@ int main() {
                 "5.000"
             },
             "100.000.00"
+        },        {
+            "1",
+            "Jorge",
+            "27/02/2030",
+            "joji",
+            {
+                "1.000",
+                "5",
+                "200.00",
+                "5.000"
+            },
+            "100.000.00"
         },
+        {
+            "2",
+            "Miguel",
+            "27/02/2003",
+            "Miguel",
+            {
+                "10.000",
+                "5",
+                "2.000.00",
+                "5.000"
+            },
+            "100.000.00"
+        }
     };
     unsigned int arraySize = sizeof(projeto)/sizeof(projeto[0]);
     
