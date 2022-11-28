@@ -24,7 +24,7 @@ void getLucroTotal(Projeto** listaDeProjetos, unsigned int avaiableProjects) {
     for (unsigned int i = 0; i < avaiableProjects; i++)
     {
         printf("\n%d", i);
-        printf("\n%s", listaDeProjetos[i]->cliente);
+        printf("%s", listaDeProjetos[i]->cliente);
     }
 }
 void getProjetosAtrasados() {
@@ -79,7 +79,7 @@ int main() {
             "2",
             "Miguel",
             "27/02/2003",
-            "Mig",
+            "Miguel",
             {
                 "10.000",
                 "5",
@@ -92,7 +92,13 @@ int main() {
     unsigned int arraySize = sizeof(projeto)/sizeof(projeto[0]);
     
     Projeto* listaProjetos = (Projeto*) malloc(arraySize * sizeof(Projeto));
-    free(listaProjetos);
+    // Coloca os projetos na memória alocada
+    printf("%d", arraySize);
+    for (unsigned int i = 0; i < arraySize; i++)
+    {
+        printf("%s", projeto[i].cliente);
+        listaProjetos[i] = projeto[i];
+    }
     
     int option = 1;
     while (option == 1)
@@ -130,6 +136,6 @@ int main() {
             break;
         }
     }
-    
+    free(listaProjetos);
     return 0;
 }
