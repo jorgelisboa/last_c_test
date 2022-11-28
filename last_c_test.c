@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define PROJETOS 15
+#include <string.h> //necessário para strcpy
 
 typedef struct
 {
@@ -28,24 +28,24 @@ void getLucroTotal(Projeto** listaDeProjetos, unsigned int avaiableProjects) {
     }
 }
 void getProjetosAtrasados() {
-    
+
 }
 void getProjetoComMaisHorasExtras() {
-    
+
 }
 void getProjetoComMaiorGasto() {
-    
+
 }
 void getProjectsInfoByGerente() {
-    
+
 }
 void getProjectInfoByCliente() {
-    
+
 }
 
 int getUserOption() {
     unsigned int option;
-    
+
     printf("Digite uma das opções acima: ");
     scanf("%d", &option);
 
@@ -66,7 +66,7 @@ int main() {
             "1",
             "Jorge",
             "27/02/2030",
-            "joji",
+            "jorgin",
             {
                 "1.000",
                 "5",
@@ -88,7 +88,7 @@ int main() {
             },
             "100.000.00"
         },        {
-            "1",
+            "4",
             "Jorge",
             "27/02/2030",
             "joji",
@@ -101,7 +101,7 @@ int main() {
             "100.000.00"
         },
         {
-            "2",
+            "3",
             "Miguel",
             "27/02/2003",
             "Miguel",
@@ -115,16 +115,27 @@ int main() {
         }
     };
     unsigned int arraySize = sizeof(projeto)/sizeof(projeto[0]);
-    
+
     Projeto* listaProjetos = (Projeto*) malloc(arraySize * sizeof(Projeto));
     // Coloca os projetos na memória alocada
     printf("%d", arraySize);
     for (unsigned int i = 0; i < arraySize; i++)
     {
+        // Base do projeto
+        strcpy(listaProjetos[i].cliente, projeto[i].cliente);
+        strcpy(listaProjetos[i].codigoDoProjeto, projeto[i].codigoDoProjeto);
+        strcpy(listaProjetos[i].dataDeEntregaPrevistaParaProjeto, projeto[i].dataDeEntregaPrevistaParaProjeto);
+        strcpy(listaProjetos[i].gerente, projeto[i].gerente);
+
+        // Despesas do projeto
+        strcpy(listaProjetos[i].despesasProjeto.horasExtras, projeto[i].despesasProjeto.horasExtras);
+        strcpy(listaProjetos[i].despesasProjeto.outrosGastos, projeto[i].despesasProjeto.outrosGastos);
+        strcpy(listaProjetos[i].despesasProjeto.salarioDesenvolvedores, projeto[i].despesasProjeto.horasExtras);
+        strcpy(listaProjetos[i].despesasProjeto.horasExtras, projeto[i].despesasProjeto.horasExtras);
+        strcpy(listaProjetos[i].despesasProjeto.salarioDeslocamento, projeto[i].despesasProjeto.salarioDeslocamento);
         printf("%s", projeto[i].cliente);
-        listaProjetos[i] = projeto[i];
     }
-    
+
     int option = 1;
     while (option == 1)
     {
