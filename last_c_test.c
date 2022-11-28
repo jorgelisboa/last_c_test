@@ -1,40 +1,45 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 #define PROJETOS 15
 
-struct DespesasProjeto
+typedef struct
 {
     char salarioDesenvolvedores[9];
     char horasExtras[10];
     char salarioDeslocamento[10];
     char outrosGastos[10];
-};
-struct Projeto // Cria uma STRUCT para armazenar os dados de uma pessoa
+}DespesasProjeto;
+typedef struct  // Cria uma STRUCT para armazenar os dados de uma pessoa
 {
     char codigoDoProjeto[10];
     char gerente[60];
     char dataDeEntregaPrevistaParaProjeto[10];
     char cliente[60];
-    struct DespesasProjeto despesasProjeto;
+    DespesasProjeto despesasProjeto;
     char receitaProjeto[100];
-}; // Define o nome do novo tipo criado
+}Projeto; // Define o nome do novo tipo criado
 
-void getLucroTotal(Projeto projetoArray[]) {
+void getLucroTotal(Projeto** listaDeProjetos, unsigned int avaiableProjects) {
+    printf("getLucroTotal\n");
+    for (unsigned int i = 0; i < avaiableProjects; i++)
+    {
+        printf("\n%d", i);
+        printf("\n%s", listaDeProjetos[i]->cliente);
+    }
+}
+void getProjetosAtrasados() {
     
 }
-void getProjetosAtrasados(Projeto projetoArray[]) {
+void getProjetoComMaisHorasExtras() {
     
 }
-void getProjetoComMaisHorasExtras(Projeto projetoArray[]) {
+void getProjetoComMaiorGasto() {
     
 }
-void getProjetoComMaiorGasto(Projeto projetoArray[]) {
+void getProjectsInfoByGerente() {
     
 }
-void getProjectsInfoByGerente(Projeto projetoArray[]) {
-    
-}
-void getProjectInfoByCliente(Projeto projetoArray[]) {
+void getProjectInfoByCliente() {
     
 }
 
@@ -56,6 +61,39 @@ void showAvaiableOptions() {
     printf("0 - Sair \n");
 }
 int main() {
+    Projeto projeto[] = {
+        {
+            "1",
+            "Jorge",
+            "27/02/2030",
+            "joji",
+            {
+                "1.000",
+                "5",
+                "200.00",
+                "5.000"
+            },
+            "100.000.00"
+        },
+        {
+            "2",
+            "Miguel",
+            "27/02/2003",
+            "Mig",
+            {
+                "10.000",
+                "5",
+                "2.000.00",
+                "5.000"
+            },
+            "100.000.00"
+        },
+    };
+    unsigned int arraySize = sizeof(projeto)/sizeof(projeto[0]);
+    
+    Projeto* listaProjetos = (Projeto*) malloc(arraySize * sizeof(Projeto));
+    free(listaProjetos);
+    
     int option = 1;
     while (option == 1)
     {
@@ -64,28 +102,28 @@ int main() {
         switch (userOption)
         {
         case 1:
-            getLucroTotal()
-            printf("CASO UM");
+            getLucroTotal(&listaProjetos, arraySize);
+            printf("\nCASO UM");
             break;
         case 2:
-            getProjetosAtrasados()
-            printf("CASO DOIS");
+            getProjetosAtrasados();
+            printf("\nCASO DOIS");
             break;
         case 3:
-            getProjetoComMaisHorasExtras()
-            printf("CASO TRÊS");
+            getProjetoComMaisHorasExtras();
+            printf("\nCASO TRÊS");
             break;
         case 4:
-            getProjetoComMaiorGasto()
-            printf("CASO QUATRO");
+            getProjetoComMaiorGasto();
+            printf("\nCASO QUATRO");
             break;
         case 5:
-            getProjectsInfoByGerente()
-            printf("CASO CINCO");
+            getProjectsInfoByGerente();
+            printf("\nCASO CINCO");
             break;
         case 6:
-            getProjectInfoByCliente()
-            printf("CASO SEIS");
+            getProjectInfoByCliente();
+            printf("\nCASO SEIS");
             break;
         default:
             option = 0;
