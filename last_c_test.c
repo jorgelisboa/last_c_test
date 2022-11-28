@@ -23,8 +23,8 @@ void getLucroTotal(Projeto** listaDeProjetos, unsigned int avaiableProjects) {
     printf("\nAVAIABLE PROJECTS: %d", avaiableProjects);
     for (unsigned int i = 0; i < avaiableProjects; i++)
     {
-        printf("\n%d", i);
         printf("\n%s", listaDeProjetos[i]->cliente);
+        fflush(stdout);
     }
 }
 void getProjetosAtrasados() {
