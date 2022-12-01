@@ -30,8 +30,6 @@ typedef struct
     Data dataEntrega;
 }Projeto;
 
-
-
 void getLucroTotal(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
     float gastos;
     for (unsigned int i = 0; i < avaiableProjects; i++) {
@@ -92,11 +90,16 @@ void getProjectsInfoByGerente(Projeto* listaDeProjetos, unsigned int avaiablePro
     for (unsigned int i = 0; i < avaiableProjects; i++) {
         if(strcmp((listaDeProjetos[i].gerente), name) == 0) {
             achouGerente = 1;
-            printf("\nPROJETO %d - %s", listaDeProjetos[i].codigo, listaDeProjetos[i].gerente);
-            printf("\n - Data de entrega:  %d/0%d/%d", listaDeProjetos[i].dataEntrega.dia, listaDeProjetos[i].dataEntrega.mes, listaDeProjetos[i].dataEntrega.ano);
-            // printf("\n - PROJETO %d", listaDeProjetos[i].);
-            // printf("\nPROJETO %d", listaDeProjetos[i].codigo);
-            // printf("\nPROJETO %d", listaDeProjetos[i].codigo);
+            printf("\nPROJETO %d", listaDeProjetos[i].codigo);
+            printf("\n\t - Data de entrega:  %d/%d/%d", listaDeProjetos[i].dataEntrega.dia, listaDeProjetos[i].dataEntrega.mes, listaDeProjetos[i].dataEntrega.ano);
+            printf("\n\t - cliente: %s", listaDeProjetos[i].cliente);
+            printf(
+                "\nLUCRO: %.2f", 
+                listaDeProjetos->receitaProjeto - ((listaDeProjetos[i].despesas.deslocamento) + 
+                (listaDeProjetos[i].despesas.horasExtras) + 
+                (listaDeProjetos[i].despesas.salarioDesenvolvedor) + 
+                (listaDeProjetos[i].despesas.outros))
+            );
         }
     }
 
@@ -111,11 +114,10 @@ void getProjectInfoByCliente(Projeto* listaDeProjetos, unsigned int avaiableProj
     for (unsigned int i = 0; i < avaiableProjects; i++) {
         if(strcmp((listaDeProjetos[i].cliente), name) == 0) {
             achouCliente = 1;
-            printf("\nPROJETO %d - %s", listaDeProjetos[i].codigo, listaDeProjetos[i].cliente);
-            printf("\n - Data de entrega:  %d/0%d/%d", listaDeProjetos[i].dataEntrega.dia, listaDeProjetos[i].dataEntrega.mes, listaDeProjetos[i].dataEntrega.ano);
-            // printf("\n - PROJETO %d", listaDeProjetos[i].);
-            // printf("\nPROJETO %d", listaDeProjetos[i].codigo);
-            // printf("\nPROJETO %d", listaDeProjetos[i].codigo);
+            printf("\nPROJETO %d", listaDeProjetos[i].codigo);
+            printf("\n\t - Data de entrega:  %d/%d/%d", listaDeProjetos[i].dataEntrega.dia, listaDeProjetos[i].dataEntrega.mes, listaDeProjetos[i].dataEntrega.ano);
+            printf("\n\t - gerente: %s", listaDeProjetos[i].gerente);
+            printf("\nCUSTO: %.2f", listaDeProjetos[i].receitaProjeto);
         }
     }
 
