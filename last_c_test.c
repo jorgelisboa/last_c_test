@@ -5,6 +5,7 @@
 #include <math.h>
 #include <time.h>
 #define nome 50
+
 typedef struct
 {
     float salarioDesenvolvedor;
