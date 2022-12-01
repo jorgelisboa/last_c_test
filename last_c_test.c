@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include <math.h>
 #include <time.h>
 #define nome 50
@@ -86,16 +87,41 @@ void getProjetoComMaiorGasto(Projeto* listaDeProjetos, unsigned int avaiableProj
     );
 
 }
-void getProjectsInfoByGerente(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
+void getProjectsInfoByGerente(Projeto* listaDeProjetos, unsigned int avaiableProjects, char name[nome]) {
+    unsigned int achouGerente = 0;
     for (unsigned int i = 0; i < avaiableProjects; i++) {
-        printf("\n%s", listaDeProjetos[i].cliente);
-        fflush(stdout);
+        if(strcmp((listaDeProjetos[i].gerente), name) == 0) {
+            achouGerente = 1;
+            printf("\nPROJETO %d - %s", listaDeProjetos[i].codigo, listaDeProjetos[i].gerente);
+            printf("\n - Data de entrega:  %d/0%d/%d", listaDeProjetos[i].dataEntrega.dia, listaDeProjetos[i].dataEntrega.mes, listaDeProjetos[i].dataEntrega.ano);
+            // printf("\n - PROJETO %d", listaDeProjetos[i].);
+            // printf("\nPROJETO %d", listaDeProjetos[i].codigo);
+            // printf("\nPROJETO %d", listaDeProjetos[i].codigo);
+        }
     }
+
+    if (achouGerente == 0)
+    {
+        printf("GERENTE '%s' NÃO ENCONTRADO", name);
+    }
+    
 }
-void getProjectInfoByCliente(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
+void getProjectInfoByCliente(Projeto* listaDeProjetos, unsigned int avaiableProjects, char name[nome]) {
+    unsigned int achouCliente = 0;
     for (unsigned int i = 0; i < avaiableProjects; i++) {
-        printf("\n%s", listaDeProjetos[i].cliente);
-        fflush(stdout);
+        if(strcmp((listaDeProjetos[i].cliente), name) == 0) {
+            achouCliente = 1;
+            printf("\nPROJETO %d - %s", listaDeProjetos[i].codigo, listaDeProjetos[i].cliente);
+            printf("\n - Data de entrega:  %d/0%d/%d", listaDeProjetos[i].dataEntrega.dia, listaDeProjetos[i].dataEntrega.mes, listaDeProjetos[i].dataEntrega.ano);
+            // printf("\n - PROJETO %d", listaDeProjetos[i].);
+            // printf("\nPROJETO %d", listaDeProjetos[i].codigo);
+            // printf("\nPROJETO %d", listaDeProjetos[i].codigo);
+        }
+    }
+
+    if (achouCliente == 0)
+    {
+        printf("CLIENTE '%s' NÃO ENCONTRADO", name);
     }
 }
 
@@ -125,6 +151,8 @@ void clearTerminal() {
     system("clear");
 }
 int main() {
+    char nomeCliente[nome];
+    char nomeGerente[nome];
 
     Projeto projeto[] = {
         {
@@ -140,8 +168,8 @@ int main() {
             },
             {
             	27,
-            	2,
-            	2020
+            	12,
+            	2022
             }
         },
         {
@@ -156,9 +184,9 @@ int main() {
                 9000.00
             },
             {
-            	27,
+            	20,
             	2,
-            	2020
+            	2010
             }
         }
     };
@@ -214,10 +242,14 @@ int main() {
             getProjetoComMaiorGasto(listaProjetos, arrayLength);
             break;
         case 5:
-            getProjectsInfoByGerente(listaProjetos, arrayLength);
+            printf("\nDigite o nome do gerente desejado: ");
+            scanf("%s", nomeGerente);
+            getProjectsInfoByGerente(listaProjetos, arrayLength, nomeGerente);
             break;
         case 6:
-            getProjectInfoByCliente(listaProjetos, arrayLength);
+            printf("\nDigite o nome do cliente desejado: ");
+            scanf("%s", nomeCliente);
+            getProjectInfoByCliente(listaProjetos, arrayLength, nomeCliente);
             break;
         case 0:
             divisor();
