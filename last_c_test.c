@@ -4,17 +4,6 @@
 #include <math.h>
 #include <time.h>
 #define nome 50
-
-typedef struct
-{
-    int codigo;
-    char gerente[nome];
-    char cliente[nome];
-    float receitaProjeto;
-    Despesas despesas;
-    Data dataEntrega;
-}Projeto;
-
 typedef struct
 {
     float salarioDesenvolvedor;
@@ -30,28 +19,60 @@ typedef struct
     int ano;
 }Data;
 
-void getLucroTotal(Projeto** listaDeProjetos, unsigned int avaiableProjects) {
-    printf("\nAVAIABLE PROJECTS: %d", avaiableProjects);
-    for (unsigned int i = 0; i < avaiableProjects; i++)
-    {
-        printf("\n%s", listaDeProjetos[i]->cliente);
+typedef struct
+{
+    int codigo;
+    char gerente[nome];
+    char cliente[nome];
+    float receitaProjeto;
+    Despesas despesas;
+    Data dataEntrega;
+}Projeto;
+
+
+
+void getLucroTotal(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
+    float gastos;
+    for (unsigned int i = 0; i < avaiableProjects; i++) {
+        gastos = 
+                (listaDeProjetos[i].despesas.deslocamento) + 
+                (listaDeProjetos[i].despesas.horasExtras) + 
+                (listaDeProjetos[i].despesas.salarioDesenvolvedor) + 
+                (listaDeProjetos[i].despesas.outros);
+        printf("\n TOTAL: %f", listaDeProjetos[i].receitaProjeto);
+        printf("\n GASTOS: %f", gastos);
+        printf("\nO projeto %d tem o lucro atual de R$: %.2f", listaDeProjetos[i].codigo, listaDeProjetos[i].receitaProjeto - gastos);
+    }
+}
+void getProjetosAtrasados(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
+    for (unsigned int i = 0; i < avaiableProjects; i++) {
+        printf("\n%s", listaDeProjetos[i].cliente);
         fflush(stdout);
     }
 }
-void getProjetosAtrasados() {
-
+void getProjetoComMaisHorasExtras(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
+    for (unsigned int i = 0; i < avaiableProjects; i++) {
+        printf("\n%s", listaDeProjetos[i].cliente);
+        fflush(stdout);
+    }
 }
-void getProjetoComMaisHorasExtras() {
-
+void getProjetoComMaiorGasto(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
+    for (unsigned int i = 0; i < avaiableProjects; i++) {
+        printf("\n%s", listaDeProjetos[i].cliente);
+        fflush(stdout);
+    }
 }
-void getProjetoComMaiorGasto() {
-
+void getProjectsInfoByGerente(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
+    for (unsigned int i = 0; i < avaiableProjects; i++) {
+        printf("\n%s", listaDeProjetos[i].cliente);
+        fflush(stdout);
+    }
 }
-void getProjectsInfoByGerente() {
-
-}
-void getProjectInfoByCliente() {
-
+void getProjectInfoByCliente(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
+    for (unsigned int i = 0; i < avaiableProjects; i++) {
+        printf("\n%s", listaDeProjetos[i].cliente);
+        fflush(stdout);
+    }
 }
 
 int getUserOption() {
@@ -63,26 +84,52 @@ int getUserOption() {
     return option;
 }
 void showAvaiableOptions() {
-    printf("\n1 - Lucro Total dos projetos em andamento \n");
+    printf("1 - Lucro Total dos projetos em andamento \n");
     printf("2 - Quantos projetos estão atrasados \n");
     printf("3 - Projeto com maior gasto com horas extras \n");
     printf("4 - Projeto com maior gasto total \n");
     printf("5 - Informação do projeto (gerente) \n");
     printf("6 - Informação do projeto (cliente) \n");
-    printf("0 - Sair \n");
+    printf("0 - Sair");
+}
+
+void divisor() {
+    printf("\n-------------------\n");
+}
+
+void clearTerminal() {
+    system("clear");
 }
 int main() {
+
     Projeto projeto[] = {
         {
             1,
             "Jorge",
             "jorgin",
-            100000.00
+            100000.00,
             {
-		50000.00,
-		20000.00,
-		1000.00,
-		5000.00
+                50000.00,
+                10000.00,
+                100.00,
+                500.00
+            },
+            {
+            	27,
+            	2,
+            	2020
+            }
+        },
+        {
+            2,
+            "Miguel",
+            "Miguelzinho",
+            100000.00,
+            {
+                10000.00,
+                40000.00,
+                6000.00,
+                9000.00
             },
             {
             	27,
@@ -91,58 +138,62 @@ int main() {
             }
         }
     };
-    unsigned int arraySize = sizeof(projeto)/sizeof(projeto[0]);
 
-    Projeto* listaProjetos = (Projeto*) malloc(arraySize * sizeof(Projeto));
+    unsigned int arrayLength = sizeof(projeto)/sizeof(projeto[0]);
+    Projeto* listaProjetos = (Projeto*) malloc(arrayLength * sizeof(Projeto));
+
     // Coloca os projetos na memória alocada
-    printf("%d", arraySize);
-    for (unsigned int i = 0; i < arraySize; i++)
+    for (unsigned int i = 0; i < arrayLength; i++)
     {
         // Base do projeto
         strcpy(listaProjetos[i].cliente, projeto[i].cliente);
-        strcpy(listaProjetos[i].codigoDoProjeto, projeto[i].codigoDoProjeto);
-        strcpy(listaProjetos[i].dataDeEntregaPrevistaParaProjeto, projeto[i].dataDeEntregaPrevistaParaProjeto);
         strcpy(listaProjetos[i].gerente, projeto[i].gerente);
+        listaProjetos[i].codigo = projeto[i].codigo;
+        listaProjetos[i].receitaProjeto = projeto[i].receitaProjeto;
+        listaProjetos[i].dataEntrega = projeto[i].dataEntrega;
 
-        // Despesas do projeto
-        strcpy(listaProjetos[i].despesasProjeto.horasExtras, projeto[i].despesasProjeto.horasExtras);
-        strcpy(listaProjetos[i].despesasProjeto.outrosGastos, projeto[i].despesasProjeto.outrosGastos);
-        strcpy(listaProjetos[i].despesasProjeto.salarioDesenvolvedores, projeto[i].despesasProjeto.horasExtras);
-        strcpy(listaProjetos[i].despesasProjeto.horasExtras, projeto[i].despesasProjeto.horasExtras);
-        strcpy(listaProjetos[i].despesasProjeto.salarioDeslocamento, projeto[i].despesasProjeto.salarioDeslocamento);
-        printf("%s", projeto[i].cliente);
+        // Despesas
+        listaProjetos[i].despesas.deslocamento = projeto[i].despesas.deslocamento;
+        listaProjetos[i].despesas.horasExtras = projeto[i].despesas.horasExtras;
+        listaProjetos[i].despesas.salarioDesenvolvedor = projeto[i].despesas.salarioDesenvolvedor;
+        listaProjetos[i].despesas.outros = projeto[i].despesas.outros;
+
+        // Datas
+        listaProjetos[i].dataEntrega.ano = projeto[i].dataEntrega.ano;
+        listaProjetos[i].dataEntrega.mes = projeto[i].dataEntrega.mes;
+        listaProjetos[i].dataEntrega.dia = projeto[i].dataEntrega.dia;
+
     }
 
     int option = 1;
     while (option == 1)
     {
+        divisor();
         showAvaiableOptions();
+        divisor();
         int userOption = getUserOption();
+        divisor();
+        clearTerminal();
+
         switch (userOption)
         {
         case 1:
-            getLucroTotal(&listaProjetos, arraySize);
-            printf("\nCASO UM");
+            getLucroTotal(listaProjetos, arrayLength);
             break;
         case 2:
-            getProjetosAtrasados();
-            printf("\nCASO DOIS");
+            getProjetosAtrasados(listaProjetos, arrayLength);
             break;
         case 3:
-            getProjetoComMaisHorasExtras();
-            printf("\nCASO TRÊS");
+            getProjetoComMaisHorasExtras(listaProjetos, arrayLength);
             break;
         case 4:
-            getProjetoComMaiorGasto();
-            printf("\nCASO QUATRO");
+            getProjetoComMaiorGasto(listaProjetos, arrayLength);
             break;
         case 5:
-            getProjectsInfoByGerente();
-            printf("\nCASO CINCO");
+            getProjectsInfoByGerente(listaProjetos, arrayLength);
             break;
         case 6:
-            getProjectInfoByCliente();
-            printf("\nCASO SEIS");
+            getProjectInfoByCliente(listaProjetos, arrayLength);
             break;
         default:
             option = 0;
