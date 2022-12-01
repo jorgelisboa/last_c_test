@@ -3,7 +3,6 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
-#include <string.h> //necessário para strcpy
 #define nome 50
 
 typedef struct
