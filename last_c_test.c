@@ -51,16 +51,40 @@ void getProjetosAtrasados(Projeto* listaDeProjetos, unsigned int avaiableProject
     }
 }
 void getProjetoComMaisHorasExtras(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
+    float projetoComMaisHorasExtras = 0;
+    unsigned int indiceProjetoComMaisHorasExtras = 0;
     for (unsigned int i = 0; i < avaiableProjects; i++) {
-        printf("\n%s", listaDeProjetos[i].cliente);
-        fflush(stdout);
+        if (projetoComMaisHorasExtras < listaDeProjetos[i].despesas.horasExtras)
+        {
+            indiceProjetoComMaisHorasExtras = i;
+        }
     }
+    printf("O projeto com mais horas extras é o projeto %d com R$:%.2f", listaDeProjetos[indiceProjetoComMaisHorasExtras].codigo, listaDeProjetos[indiceProjetoComMaisHorasExtras].despesas.horasExtras);
+
 }
 void getProjetoComMaiorGasto(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
+    float projetoComMaiorGasto = 0;
+    unsigned int indiceProjetoComMaiorGasto = 0;
     for (unsigned int i = 0; i < avaiableProjects; i++) {
-        printf("\n%s", listaDeProjetos[i].cliente);
-        fflush(stdout);
+        
+        if (projetoComMaiorGasto < ((listaDeProjetos[i].despesas.deslocamento) + 
+            (listaDeProjetos[i].despesas.horasExtras) + 
+            (listaDeProjetos[i].despesas.salarioDesenvolvedor) + 
+            (listaDeProjetos[i].despesas.outros)))
+        {
+            indiceProjetoComMaiorGasto = i;
+        }
     }
+    
+    printf(
+        "O projeto com maior gasto é o projeto %d com R$:%.2f", 
+        listaDeProjetos[indiceProjetoComMaiorGasto].codigo, 
+        ((listaDeProjetos[indiceProjetoComMaiorGasto].despesas.deslocamento) + 
+        (listaDeProjetos[indiceProjetoComMaiorGasto].despesas.horasExtras) + 
+        (listaDeProjetos[indiceProjetoComMaiorGasto].despesas.salarioDesenvolvedor) + 
+        (listaDeProjetos[indiceProjetoComMaiorGasto].despesas.outros))
+    );
+
 }
 void getProjectsInfoByGerente(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
     for (unsigned int i = 0; i < avaiableProjects; i++) {
@@ -195,8 +219,14 @@ int main() {
         case 6:
             getProjectInfoByCliente(listaProjetos, arrayLength);
             break;
-        default:
+        case 0:
+            divisor();
+            printf("MUITO OBRIGADO POR UTILIZAR O SISTEMA");
             option = 0;
+            break;
+        default:
+            divisor();
+            printf("DIGITE UMA OPÇÃO VÁLIDA");
             break;
         }
     }
