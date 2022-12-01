@@ -1,23 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
 #include <string.h> //necessário para strcpy
+#define nome 50
 
 typedef struct
 {
-    char salarioDesenvolvedores[9];
-    char horasExtras[10];
-    char salarioDeslocamento[10];
-    char outrosGastos[10];
-}DespesasProjeto;
-typedef struct  // Cria uma STRUCT para armazenar os dados de uma pessoa
+    int codigo;
+    char gerente[nome];
+    char cliente[nome];
+    float receitaProjeto;
+    Despesas despesas;
+    Data dataEntrega;
+}Projeto;
+
+typedef struct
 {
-    char codigoDoProjeto[10];
-    char gerente[60];
-    char dataDeEntregaPrevistaParaProjeto[10];
-    char cliente[60];
-    DespesasProjeto despesasProjeto;
-    char receitaProjeto[100];
-}Projeto; // Define o nome do novo tipo criado
+    float salarioDesenvolvedor;
+    float horasExtras;
+    float deslocamento;
+    float outros;
+}Despesas;
+
+typedef struct
+{
+    int dia;
+    int mes;
+    int ano;
+}Data;
 
 void getLucroTotal(Projeto** listaDeProjetos, unsigned int avaiableProjects) {
     printf("\nAVAIABLE PROJECTS: %d", avaiableProjects);
