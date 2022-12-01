@@ -31,6 +31,13 @@ typedef struct
     Data dataEntrega;
 }Projeto;
 
+void divisor() {
+    printf("\n-------------------\n");
+}
+void clearTerminal() {
+    system("clear");
+}
+
 void getLucroTotal(Projeto* listaDeProjetos, unsigned int avaiableProjects) {
     float gastos;
     for (unsigned int i = 0; i < avaiableProjects; i++) {
@@ -101,6 +108,7 @@ void getProjectsInfoByGerente(Projeto* listaDeProjetos, unsigned int avaiablePro
                 (listaDeProjetos[i].despesas.salarioDesenvolvedor) + 
                 (listaDeProjetos[i].despesas.outros))
             );
+            divisor();
         }
     }
 
@@ -119,6 +127,7 @@ void getProjectInfoByCliente(Projeto* listaDeProjetos, unsigned int avaiableProj
             printf("\n\t - Data de entrega:  %d/%d/%d", listaDeProjetos[i].dataEntrega.dia, listaDeProjetos[i].dataEntrega.mes, listaDeProjetos[i].dataEntrega.ano);
             printf("\n\t - gerente: %s", listaDeProjetos[i].gerente);
             printf("\nCUSTO: %.2f", listaDeProjetos[i].receitaProjeto);
+            divisor();
         }
     }
 
@@ -146,50 +155,43 @@ void showAvaiableOptions() {
     printf("0 - Sair");
 }
 
-void divisor() {
-    printf("\n-------------------\n");
-}
-
-void clearTerminal() {
-    system("clear");
-}
 int main() {
     char nomeCliente[nome];
     char nomeGerente[nome];
 
     Projeto projeto[] = {
         {
-            1,
-            "Jorge",
-            "jorgin",
-            100000.00,
-            {
-                50000.00,
-                10000.00,
-                100.00,
-                500.00
+            1, //Código
+            "Jorge", //Gerente
+            "jorgin", //Cliente
+            100000.00, //Receita Projeto
+            { //Despesas
+                50000.00, //Salario desenvolvedores
+                10000.00, //Horas extras
+                100.00, //Deslocamento
+                500.00 //Outros
             },
-            {
-            	27,
-            	12,
-            	2022
+            { //Data
+            	27, //Dia
+            	12, //Mes
+            	2022 //Ano
             }
         },
         {
-            2,
-            "Miguel",
-            "Miguelzinho",
-            100000.00,
-            {
-                10000.00,
-                40000.00,
-                6000.00,
-                9000.00
+            2, //Código
+            "Jorge", //Gerente
+            "jorgin", //Cliente
+            150000.00, //Receita Projeto
+            { //Despesas
+                30000.00, //Salario desenvolvedores
+                10000.00, //Horas extras
+                100.00, //Deslocamento
+                500.00 //Outros
             },
-            {
-            	20,
-            	2,
-            	2010
+            { //Data
+            	27, //Dia
+            	12, //Mes
+            	2022 //Ano
             }
         }
     };
